@@ -5,10 +5,9 @@ import flaskwebgui
 import sqlite3
 import os
 
-# Add filename for user uploads + allowed filetypes.
-# Images only, since this app doesn't store much else besides text about characters + their pictures.
+# Add macros.
 # TODO: Later on, need to add a gallery option to save additional images of characters.
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}  # Only images are allowed currently.
 ICON_FOLDER = 'static/images/icons'
 DEFAULT_ICON = '../static/images/icons/0.png'
 
@@ -21,6 +20,7 @@ app.config['ICON_FOLDER'] = ICON_FOLDER
 # UTILITY FUNCTIONS
 
 # Get the database. This is used for display on the front page.
+# TODO: When it comes to adding folders, likely add a 'folders' column and search via that?
 def get_db():
     cn = sqlite3.connect('database/database.db')
     cn.row_factory = sqlite3.Row  # Get characters by row (makes them accessible via name or by index)
@@ -57,15 +57,15 @@ def home():
 # Character profile loader. Loads the character you select!
 @app.route("/character/<chara_name>")
 def show_character_profile(chara_name):
-    return render_template('profile.html', info=get_info_by_name(chara_name))
+    return render_template('profile.html', info=get_info_by_name(chara_name))  # Create the create page; get information by character name to display.
 
 # Create page. Needs to get all of the information you want it to, then adds the character to your database!
 # TODO: image upload, add text to database, default icon.
 @app.route("/create", methods=("GET", "POST"))
 def create():
     if request.method == 'POST':
-        # Start with the default icon.
-        iconpath = DEFAULT_ICON
+        # Adding icon:
+        iconpath = DEFAULT_ICON # Start with the default icon.
         
         # Check if post request has the file part.
         if 'icon' not in request.files:
@@ -79,6 +79,7 @@ def create():
                 icon.save(os.path.join(app.config['ICON_FOLDER'], iconname))
                 iconpath = "../" + ICON_FOLDER+"/"+iconname  # Create the path to the icon so it can be stored.
 
+        # Get rest of information (all text) from form.
         cname = request.form['name']
         gender = request.form['gender']
         race = request.form['race']
@@ -92,17 +93,18 @@ def create():
             cn = get_db()
             cn.execute('INSERT INTO character (icon, cname, gender, race, personality, backstory) VALUES (?, ?, ?, ?, ?, ?)',  # The table is set up so that defaults will be NULL.
                     (iconpath, cname, gender, race, personality, backstory))  # You should be able to just add characters w/o filling every field.
+            # TODO: When adding new or custom fields, use if statements instead to build the character row?
             cn.commit()
             cn.close()
             return redirect(url_for('home'))  # Return home
     
-    return render_template('create.html')
+    return render_template('create.html')  # Create the create page.
 
 # Edit page. Ideally, final version of this will look almost exactly like the character profile pages!
 @app.route('/character/<chara_name>/edit', methods=('GET', 'POST'))
 def edit(chara_name):
     info = get_info_by_name(chara_name)
-    # TODO: This and create's form are the same now. This should be changed so that the code isn't duplicated as much.
+    # TODO: This and create's form are the same now. Ideally this should be changed so that the code isn't duplicated.
     if request.method == 'POST':
         # Default icon should stay as this.
         iconpath = info['icon']  # Get original icon's filepath.
