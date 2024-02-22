@@ -1,0 +1,65 @@
+<!--Doc for the edit page. TODO: Make this form into a separate document to be called from other places?-->
+
+{% extends 'bp.html' %}
+
+{% block content %}
+<div class="center-main">
+    <h1>Edit {{ info.cname }}</h1>
+    <hr>
+    
+    <form method="post" enctype="multipart/form-data">
+        <div id="icon">
+            <!--ICON-->
+            <label for="icon">Icon:</label>
+            <input 
+                type="file"
+                name="icon"
+                >
+        </div>
+        <div class="headline">
+            <!--NAME-->
+            <h1><label for="name">Name:</label> <input 
+                type="text" 
+                name="name"
+                value="{{ request.form['name'] or info.cname }}"
+            ></h1>
+
+            <span class="muted">ID#{{ info.id }}, {{ info.created }}</span>
+            
+            <!--GENDER-->
+            <p><label for="gender">Gender:</label> <input 
+                type="text" 
+                name="gender"
+                value="{{ request.form['gender'] or info.gender }}"
+                ></p>
+
+            <!--RACE-->
+            <p><label for="race">Race:</label> <input 
+                type="text" 
+                name="race"
+                value="{{ request.form['race'] or info.race }}"
+                ></p>
+        </div>
+        <hr>
+        <div class="large-content">
+            <!--PERSONALITY-->
+            <h2><label for="personality">Personality:</label></h2>
+            <textarea 
+            name="personality" 
+            placeholder="Type their personality details here."
+            >{{ request.form['personality'] or info.personality }}</textarea>
+            
+            
+            <!--BACKSTORY-->
+            <h2><label for="backstory">Backstory:</label></h2>
+            <textarea 
+            name="backstory" 
+            placeholder="Type their backstory details here."
+            >{{ request.form['backstory'] or info.backstory }}</textarea>
+    </div>
+
+        <!--SUBMIT-->
+        <input type="submit" value="Edit">
+    </form>
+</div>
+{% endblock %}

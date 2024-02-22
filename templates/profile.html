@@ -1,0 +1,26 @@
+<!--
+    Profile is for displaying various characters information.
+    Character info is retrieved from the database and displayed here.
+-->
+
+{% extends 'bp.html' %}
+
+{% block content %}
+<div class="center-main">
+    <img id="icon" src="{{ info.icon }}" />
+    <div class="headline">
+        <h1>{{ info.cname }}</h1>
+        <span class="muted">ID#{{ info.id }}, {{ info.created }}</span>
+        <p><strong>Gender:</strong> {{ info.gender }}</p>
+        <p><strong>Race:</strong> {{ info.race }}</p>
+    </div>
+    <hr>
+    <div class="large-content">
+        <h2>Personality</h2>
+        <p>{{ info.personality }}</p>
+        <hr>
+        <h2>Backstory</h2>
+        <p>{{ info.backstory }}</p>
+    </div>
+</div>
+{% endblock %}

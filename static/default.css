@@ -1,0 +1,156 @@
+/* Stylesheet for general styling of the UI. Contains pretty much all of the elements. */
+
+:root {
+    --bg: rgba(42, 42, 42);
+    --text: rgba(255, 255, 255);
+    --link: rgba(173, 216, 230);
+    --lb: rgba(206, 206, 206);
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#content {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    margin-bottom: 2rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+nav {
+    box-sizing: border-box;
+    width: 100%;
+    height: 2rem;
+    padding: .5rem;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background: black;
+    text-transform: uppercase;
+}
+
+nav a {
+    color: var(--text);
+    padding: .5rem;
+}
+
+a {
+    color: var(--link);
+    text-decoration: dotted underline 2px;
+}
+
+/* MAIN PAGE */
+.c_grid {
+    margin: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 1rem;
+}
+
+.c_grid > .character {
+    text-align: center;
+}
+
+.c_grid .img-wrap {
+    border-radius: 50%;
+    width: 100%;
+    aspect-ratio: 1/1;
+    max-width: 200px;
+    max-height: 200px;
+    margin: auto;
+    overflow: hidden;
+}
+
+.img-wrap > img {
+    width: 100%;
+    height: 100%;
+    object-position: 50% 50%;
+    object-fit: cover;
+}
+
+
+
+.alert {
+    width: 30%;
+    background: var(--text);
+    color: var(--bg);
+}
+
+.muted {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* PROFILE FORMATTING */
+
+.center-main {
+    margin: auto;
+    padding: 3rem;
+    width: 75%;
+}
+
+#icon {
+    float: left;
+    height: 10rem;
+    width: 10rem;
+    object-fit: cover;
+    overflow: hidden;
+    padding: .5rem;
+    margin: 1rem 1rem 1rem 0;
+    background: var(--text);
+    border: 1px solid var(--lb);
+    border-radius: 4px;
+    color: black;
+    text-align: center;
+}
+
+.headline > h1 {
+    margin-bottom: .5rem;
+}
+
+.headline {
+    height: 10rem;
+    padding: 1.5rem;
+}
+
+.large-content {
+    clear: both;
+    width: 100%;
+}
+
+/* CREATE AND EDIT */
+
+.form-table {
+    width: 100%;
+}
+
+.form-table th, td {
+    padding: 0.5rem;
+}
+
+label {
+    font-weight: bold;
+}
+
+textarea, input[type="text"] {
+    border-radius: 4px;
+    border: 1px solid;
+    background: var(--lb);
+    padding: 4px;
+}
+
+textarea {
+    width: 100%;
+    height: 10rem;
+}
+
+h1 input[type="text"] {
+    font-size: 2rem;
+    width: 25%;
+}

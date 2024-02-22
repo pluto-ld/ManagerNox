@@ -1,0 +1,22 @@
+<!--
+    This index file is meant to render the front page of NoxManager. This page should display
+    the characters you have made so far, as well as an option to create characters.
+    main should have a grid container for the characters, and a navigation bar at the bottom of the screen.
+    Navigation bar is across all 'pages.'
+-->
+{% extends 'bp.html' %}
+
+{% block content %}
+    <div class="c_grid">
+    {% for character in characters %}
+        <div class="character">
+            <a href="{{ url_for('show_character_profile', chara_name=character.cname) }}">
+                <div class="img-wrap">
+                    <img src="{{ character.icon }}"/>
+                </div>
+                <p>{{ character.cname }}</p>
+            </a>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}

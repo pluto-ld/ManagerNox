@@ -1,0 +1,77 @@
+<!--Doc for the create page.-->
+
+{% extends 'bp.html' %}
+
+{% block content %}
+<div class="center-main">
+    <h1>Create New Character</h1>
+    <hr>
+    <form method="post" enctype="multipart/form-data">
+        <table class="form-table">
+            <tbody>
+                <!--ICON-->
+                <tr>
+                    <td><label for="icon">Icon:</label></td>
+                    <td><input 
+                        type="file"
+                        name="icon"
+                        ></td>
+                </tr>
+                <!--NAME-->
+                <tr>
+                    <td><label for="name">Name:</label></td>
+                    <td><input 
+                        type="text" 
+                        name="name"
+                        value="{{ request.form['name'] }}"
+                    ></td>
+                </tr>
+                <!--GENDER-->
+                <tr>
+                    <td><label for="gender">Gender:</label></td>
+                    <td><input 
+                        type="text" 
+                        name="gender"
+                        value="{{ request.form['gender'] }}"
+                        ></td>
+                </tr>
+                <!--RACE-->
+                <tr>
+                    <td><label for="race">Race:</label></td>
+                    <td><input 
+                        type="text" 
+                        name="race"
+                        value="{{ request.form['race'] }}"
+                        ></td>
+                </tr>
+                <!--PERSONALITY-->
+                <tr>
+                    <td colspan="2">
+                        <label for="personality">Personality:</label>
+                        <br>
+                        <textarea 
+                            name="personality" 
+                            placeholder="Type their personality details here."
+                            >{{ request.form['personality'] }}</textarea>
+                        <br>
+                    </td>
+                </tr>
+                <!--BACKSTORY-->
+                <tr>
+                    <td colspan="2">
+                        <label for="backstory">Backstory:</label>
+                        <br>
+                        <textarea 
+                            name="backstory" 
+                            placeholder="Type their backstory details here."
+                            >{{ request.form['backstory'] }}</textarea>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!--SUBMIT-->
+        <input type="submit" value="Create">
+    </form>
+</div>
+{% endblock %}
